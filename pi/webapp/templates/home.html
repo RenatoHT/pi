@@ -1,20 +1,18 @@
 {% extends 'index.html' %}
-{% block extra_javascript %}
-   {{form.media}}
-{% endblock %}
+
 
 {% block title %} Cadastro {% endblock %}
-
-{% block extra_media %} {% endblock %}
 
 {% block content %} 
 
 <h1 class="card-title text-center mb-4"> Cadastro </h1>
 
-<form method="post" action="/final/">
-    {{form}}
-    <button type="submit", name = "cadastrar">Finalizar</button>
+<form method="post", action="">
     {% csrf_token %}
+    {{form}}
+    {{form.media}}
+    <button type="submit">Finalizar</button>
+    
 </form>
 
 {% endblock %}
