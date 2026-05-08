@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://webapp-pi-img-328492778367.southamerica-east1.run.app"
+]
 # Application definition
 
 INSTALLED_APPS = [
