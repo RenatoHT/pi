@@ -1,19 +1,85 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
+{% block title %} Cĺinica Estética {% endblock %}
 
-{% block title %} Cadastro {% endblock %}
+{% block content %}
+Cadastro
 
-{% block content %} 
-
-<h1 class="card-title text-center mb-4"> Cadastro </h1>
-
-<form method="post", action="">
+<form method="post" action="">
     {% csrf_token %}
-    {{form}}
-    {{form.media}}
-    <button type="submit">Finalizar</button>
+
+    <h3>Dados Pessoais</h3>
     
+    {% for field in form %}
+        {% if field.name in personal_fields %}
+            <p>{{ field.label }}<br>{{ field }}</p>
+            {% for error in field.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+
+    <h3>Anamnese</h3>
+
+    {% for bool_field, str_field in fields %}
+
+    <div class="pair">
+
+        <div class="left">
+            {{ bool_field }}
+            <label for="{{ bool_field.id_for_label }}">
+                {{ bool_field.label }}
+            </label>
+
+            
+            {% for error in bool_field.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+
+        </div>
+
+        <div class="right">
+            {{ str_field }}
+
+            {% for error in str_field.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+
+
+
+    <div class="field assinatura-field">
+    {{ form.assinatura }}
+    {{form.media}}
+    <div class="label">
+        <label for="{{ form.assinatura.id_for_label }}">
+            {{ form.assinatura.label }}
+        </label>
+    </div>
+
+
+
+    <script>
+    document.getElementById('id_data_nasc').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, ''); // remove non-digits
+
+        if (value.length > 2) {
+            value = value.slice(0,2) + '/' + value.slice(2);
+        }
+        if (value.length > 5) {
+            value = value.slice(0,5) + '/' + value.slice(5,9);
+        }
+
+        e.target.value = value;
+    });
+    </script>
+<button type="submit">Finalizar</button>
+
 </form>
-
 {% endblock %}
-

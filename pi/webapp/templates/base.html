@@ -1,0 +1,54 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+.pair {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.left {
+    min-width: 150px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.right {
+    flex: 1;
+}
+
+.right input,
+.right textarea {
+    width: 100%;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+.errorlist {
+    color: red;
+    list-style: none;
+    padding: 0;
+}
+</style>
+
+</body>
+
+<head>
+    <title>{% block title %}Teste Site{% endblock %}</title>
+</head>
+
+<body>
+    <div id="content" name="content">
+	{% block content %}
+	{% endblock %}
+  {% block extra_javascript %}{% endblock %}
+    </div>
+
+</body>
+</html>
